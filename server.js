@@ -14,6 +14,14 @@ server.use(
   "/*": "/$1",
  })
 );
+
+server.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*'); // Allow any origin
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+  });
+
 server.use(router);
 // Listen to port
 server.listen(3000, () => {
