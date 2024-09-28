@@ -5,7 +5,16 @@ const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
 const cors = require('cors');
 const app = express();
-app.use(cors());
+
+// Configure CORS to allow requests from your frontend origin
+const corsOptions = {
+  origin: 'https://systango-task.vercel.app', // Replace with your frontend origin
+  optionsSuccessStatus: 200, // Required for preflight requests
+}
+
+app.use(cors(corsOptions));
+
+
 // server.use(
 //     cors({
 //         origin: true,
