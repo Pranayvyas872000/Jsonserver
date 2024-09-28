@@ -15,7 +15,7 @@ app.use(cors(corsOptions));
 // ... rest of your JSON Server configuration
 
 const router = jsonServer.router('db.json');
-app.use('/', router); // Use a prefix for API routes
+app.use('/(.*)', router); // Use a prefix for API routes
 
 const port =  3000;
 app.listen(port, () => {
