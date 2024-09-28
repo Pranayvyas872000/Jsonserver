@@ -19,7 +19,7 @@ const router = jsonServer.router('db.json');
 app.use(router);
 
 // Start the server
-const port = process.env.PORT || 3000; // Use environment variable for port
+const port =  3000; // Use environment variable for port
 app.listen(port, () => {
   console.log(`JSON Server is running on port ${port}`);
 });
