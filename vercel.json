@@ -9,7 +9,11 @@
       }
     }
   ],
-    "headers": [
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "server.js",
+      "headers": [
       {
         "source": "/(.*)",
         "headers": [
@@ -20,8 +24,6 @@
         ]
       }
     ]
+    }
+   ]
 }
-
-
-
-
