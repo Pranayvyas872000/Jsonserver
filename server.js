@@ -1,9 +1,8 @@
 const express = require('express');
-const jsonServer = require('json-server');
-const server = jsonServer.create();
-const router = jsonServer.router('db.json');
-const middlewares = jsonServer.defaults();
 const cors = require('cors');
+const jsonServer = require('json-server');
+const path = require('path'); // for serving static files (optional)
+
 const app = express();
 
 // Configure CORS to allow requests from your frontend origin
@@ -14,21 +13,19 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+// Configure JSON Server middleware
+const router = jsonServer.router('db.json'); // Replace 'db.json' with your data file path
+const middlewares = jsonServer.defaults(); // Load default middlewares
 
-// server.use(
-//     cors({
-//         origin: true,
-//         credentials: true,
-//         preflightContinue: false,
-//         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-//     })
-// );
-server.options('*', cors());
+app.db = jsonServer.createDb('db.json'); // Optional: Load your data into memory (faster)
 
-server.use(middlewares);
-server.use(router);
-server.listen(3000, () => {
-    console.log('JSON Server is running');
+// API endpoints (using JSON Server router)
+app.use(router);
+
+// Serve static files from a public directory (optional)
+app.use(express.static(path.join(__dirname, 'public'))); // Replace with your public directory path
+
+// Start the server
+app.listen(3000, () => {
+  console.log('JSON Server is running on port 3000');
 });
-// Export the Server API
-module.exports = server;
