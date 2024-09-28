@@ -17,7 +17,7 @@ app.use(cors(corsOptions));
 const router = jsonServer.router('db.json'); // Replace 'db.json' with your data file path
 const middlewares = jsonServer.defaults(); // Load default middlewares
 
-app.db = jsonServer.createDb('db.json'); // Optional: Load your data into memory (faster)
+
 
 // API endpoints (using JSON Server router)
 app.use(router);
