@@ -13,8 +13,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // ... rest of your JSON Server configuration
-
 const router = jsonServer.router('db.json');
+app.use(jsonServer.bodyParser);
 app.use('/', router); // Use a prefix for API routes
 
 const port =  3000;
