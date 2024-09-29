@@ -1,23 +1,16 @@
-const express = require('express');
-const cors = require('cors');
-const jsonServer = require('json-server');
 
-const app = express();
+const jsonServer = require("json-server");
+const server = jsonServer.create();
+const router = jsonServer.router("db.json");
+const middlewares = jsonServer.defaults();
 
-// Configure CORS to allow requests from your frontend origin
-const corsOptions = {
-    origin: '*', // Replace with your frontend origin
-    optionsSuccessStatus: 200
-};
 
-app.use(cors(corsOptions));
-
-// ... rest of your JSON Server configuration
-const router = jsonServer.router('db.json');
-app.use(jsonServer.bodyParser);
-app.use('/', router); // Use a prefix for API routes
-
-const port =  3000;
-app.listen(port, () => {
-    console.log(`JSON Server is running on port ${port}`);
+server.use(middlewares);
+server.use(router);
+// Listen to port
+server.listen(3000, () => {
+ console.log("JSON Server is running");
 });
+
+// Export the Server API
+module.exports = server;
